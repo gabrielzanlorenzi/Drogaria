@@ -14,6 +14,7 @@ import br.com.gabriel.drogaria.domain.Estado;
  */
 
 public class EstadoDAOTest {
+	
 	@Test
 	@Ignore
 	public void salvar() {

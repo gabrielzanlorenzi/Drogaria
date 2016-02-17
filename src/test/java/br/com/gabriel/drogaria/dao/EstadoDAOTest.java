@@ -48,7 +48,7 @@ public class EstadoDAOTest {
 		Estado estado = estadoDAO.buscar(codigo);
 		
 		if(estado == null){
-			System.out.println("Nenhum registro encontrado");
+			System.out.println("Nenhum registro encontrado!");
 		}else{
 			System.out.println("Registro encontrado:");
 			System.out.println(estado.getCodigo() + " - " + estado.getSigla() + " - " + estado.getNome());
@@ -68,6 +68,29 @@ public class EstadoDAOTest {
 			estadoDAO.excluir(estado);
 			System.out.println("Registro removido:");
 			System.out.println(estado.getCodigo() + " - " + estado.getSigla() + " - " + estado.getNome());
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void editar(){
+		Long codigo = 7L;
+		EstadoDAO estadoDAO = new EstadoDAO();
+		Estado estado = estadoDAO.buscar(codigo);
+		
+		if(estado == null){
+			System.out.println("Nenhum registro encontrado para alterar!");
+		}else{
+			System.out.println("Registro a ser alterado:");
+			System.out.println(estado.getCodigo() + " - " + estado.getSigla() + " - " + estado.getNome());
+			
+			estado.setNome("Santa Catarina");
+			estado.setSigla("SC");
+			estadoDAO.editar(estado);
+			
+			System.out.println("Registro a alterado para:");
+			System.out.println(estado.getCodigo() + " - " + estado.getSigla() + " - " + estado.getNome());
+			
 		}
 	}
 }

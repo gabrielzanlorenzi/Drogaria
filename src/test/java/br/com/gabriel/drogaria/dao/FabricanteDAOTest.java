@@ -39,7 +39,7 @@ public class FabricanteDAOTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void buscar(){
 		Long codigo = 3L;
 		
@@ -47,7 +47,7 @@ public class FabricanteDAOTest {
 		Fabricante fabricante = fabricanteDAO.buscar(codigo);
 		
 		if(fabricante == null){
-			System.out.println("Nenhum registro encontrado");
+			System.out.println("Nenhum registro encontrado!");
 		}else{
 			System.out.println("Registro encontrado:");
 			System.out.println(fabricante.getCodigo() + " - " + fabricante.getDescricao());
@@ -66,6 +66,27 @@ public class FabricanteDAOTest {
 		}else{
 			fabricanteDAO.excluir(fabricante);
 			System.out.println("Registro removido:");
+			System.out.println(fabricante.getCodigo() + " - " + fabricante.getDescricao());
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void editar(){
+		Long codigo = 4L;
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(codigo);
+		
+		if(fabricante == null){
+			System.out.println("Nenhum registro encontrado para editar!");
+		}else{
+			System.out.println("Registro a ser alterado:");
+			System.out.println(fabricante.getCodigo() + " - " + fabricante.getDescricao());
+			
+			fabricante.setDescricao("Descricao Alterar");
+			fabricanteDAO.editar(fabricante);
+			
+			System.out.println("Registro alterado:");
 			System.out.println(fabricante.getCodigo() + " - " + fabricante.getDescricao());
 		}
 	}

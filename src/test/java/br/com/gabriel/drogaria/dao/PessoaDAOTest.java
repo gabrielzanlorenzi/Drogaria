@@ -1,5 +1,8 @@
 package br.com.gabriel.drogaria.dao;
 
+import java.util.List;
+
+import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.gabriel.drogaria.domain.Cidade;
@@ -14,6 +17,7 @@ import br.com.gabriel.drogaria.domain.Pessoa;
 public class PessoaDAOTest {
 
 	@Test
+	@Ignore
 	public void salvar(){
 		PessoaDAO pessoaDAO = new PessoaDAO();
 		CidadeDAO cidadeDAO = new CidadeDAO();
@@ -35,6 +39,41 @@ public class PessoaDAOTest {
 		pessoa.setCidade(cidade);
 		
 		pessoaDAO.salvar(pessoa);
+	}
+	
+	@Test
+	@Ignore
+	public void listar(){
+		PessoaDAO pessoaDAO = new PessoaDAO();
+		List<Pessoa> resultado = pessoaDAO.listar();
+		
+		for (Pessoa pessoa : resultado){
+			System.out.println("Código da pessoa: " + pessoa.getCodigo());
+			System.out.println("Nome da pessoa: " + pessoa.getNome());
+			System.out.println("CPF da pessoa: " + pessoa.getCpf());
+			System.out.println("RG da pessoa: " + pessoa.getRg());
+			System.out.println("Cidade da pessoa: " + pessoa.getCidade().getNome());
+			System.out.println("Estado da pessoa: " + pessoa.getCidade().getEstado().getNome());
+		}
+	}
+	
+	@Test
+	public void buscar(){
+		Long codigo = 9L;
+		
+		PessoaDAO pessoaDAO = new PessoaDAO();
+		Pessoa pessoa = pessoaDAO.buscar(codigo);
+		
+		if (pessoa == null) {
+			System.out.println("Nenhum registro encontrado!");
+		} else {
+			System.out.println("Código da pessoa: " + pessoa.getCodigo());
+			System.out.println("Nome da pessoa: " + pessoa.getNome());
+			System.out.println("CPF da pessoa: " + pessoa.getCpf());
+			System.out.println("RG da pessoa: " + pessoa.getRg());
+			System.out.println("Cidade da pessoa: " + pessoa.getCidade().getNome());
+			System.out.println("Estado da pessoa: " + pessoa.getCidade().getEstado().getNome());
+		}
 	}
 	
 }

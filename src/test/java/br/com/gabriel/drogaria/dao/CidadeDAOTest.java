@@ -56,7 +56,7 @@ public class CidadeDAOTest {
 		Cidade cidade = cidadeDAO.buscar(codigo);
 
 		if (cidade == null) {
-			System.out.println("Nenhum registro encontrado");
+			System.out.println("Nenhum registro encontrado!");
 		} else {
 			System.out.println("Código da Cidade: " + cidade.getCodigo());
 			System.out.println("Nome da Cidade: " + cidade.getNome());

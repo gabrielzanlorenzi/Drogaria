@@ -42,7 +42,7 @@ public class PessoaDAOTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void listar() {
 		PessoaDAO pessoaDAO = new PessoaDAO();
 		List<Pessoa> resultado = pessoaDAO.listar();

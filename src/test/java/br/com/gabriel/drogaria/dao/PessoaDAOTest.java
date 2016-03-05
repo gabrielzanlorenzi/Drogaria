@@ -108,7 +108,7 @@ public class PessoaDAOTest {
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		Cidade cidade = cidadeDAO.buscar(codigoCidade);
 		
-		System.out.println("A pessoa a se editada!");
+		System.out.println("A pessoa a ser editada!");
 		System.out.println("Código da pessoa: " + pessoa.getCodigo());
 		System.out.println("Nome da pessoa: " + pessoa.getNome());
 		System.out.println("CPF da pessoa: " + pessoa.getCpf());

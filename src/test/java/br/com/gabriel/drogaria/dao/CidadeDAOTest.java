@@ -32,7 +32,7 @@ public class CidadeDAOTest {
 	}
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void listar() {
 		CidadeDAO cidadeDAO = new CidadeDAO();
 		List<Cidade> resultado = cidadeDAO.listar();

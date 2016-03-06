@@ -4,6 +4,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+/*
+ * Classe EstadoBean para se comunicar com a parte visual
+ * @author Gabriel Zanlorenzi
+ * @since Classe criada em 04/03/2016
+ */
+
 @ManagedBean
 public class EstadoBean {
 

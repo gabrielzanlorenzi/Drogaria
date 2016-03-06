@@ -90,4 +90,20 @@ public class FabricanteDAOTest {
 			System.out.println(fabricante.getCodigo() + " - " + fabricante.getDescricao());
 		}
 	}
+	
+	@Test
+	@Ignore
+	public void merge() {
+		// Linhas para encluir usando o merge
+//		Fabricante fabricante = new Fabricante();
+//		fabricante.setDescricao("Fabricante A");
+//		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+//		fabricanteDAO.merge(fabricante);
+		
+		// Linhas para editar usando o merge (mesmo método do DAO)
+		FabricanteDAO fabricanteDAO = new FabricanteDAO();
+		Fabricante fabricante = fabricanteDAO.buscar(5L);
+		fabricante.setDescricao("Fabricante B");
+		fabricanteDAO.merge(fabricante);
+	}
 }

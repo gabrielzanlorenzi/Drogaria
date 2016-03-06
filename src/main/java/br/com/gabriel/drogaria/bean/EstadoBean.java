@@ -1,8 +1,8 @@
 package br.com.gabriel.drogaria.bean;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+
+import org.omnifaces.util.Messages;
 
 /*
  * Classe EstadoBean para se comunicar com a parte visual
@@ -14,12 +14,14 @@ import javax.faces.context.FacesContext;
 public class EstadoBean {
 
 	public void salvar() {
-		System.out.println("Salvo!");
-		String texto = "Salvo!";
-		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, texto);
-
-		FacesContext contexto = FacesContext.getCurrentInstance();
-		contexto.addMessage(null, mensagem);
+//		System.out.println("Salvo!");
+//		String texto = "Salvo!";
+//		FacesMessage mensagem = new FacesMessage(FacesMessage.SEVERITY_INFO, texto, texto);
+//
+//		FacesContext contexto = FacesContext.getCurrentInstance();
+//		contexto.addMessage(null, mensagem);
+		
+		Messages.addGlobalInfo("Estado Salvo!");
 	}
 
 }

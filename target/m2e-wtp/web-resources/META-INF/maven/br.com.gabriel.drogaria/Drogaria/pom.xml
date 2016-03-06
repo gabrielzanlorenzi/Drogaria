@@ -69,5 +69,12 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<!-- OmniFaces -->
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>1.12.1</version>
+		</dependency>
+
 	</dependencies>
 </project>

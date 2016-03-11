@@ -9,12 +9,16 @@
 	<title>Cidades</title>
 </h:head>
 <h:body>
-	<h:form>
+
+	<p:messages id="mensagem" autoUpdate="true" closable="true" />
+
+	<h:form id="formListagem">
 		<p:panel header="Cidades - Listagem">
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 				paginator="true" rows="5" value="#{cidadeBean.cidades}" var="cidade">
 				<f:facet name="header">
-					<p:commandButton value="Novo" oncomplete="PF('novaCidade').show();" />
+					<p:commandButton value="Novo" oncomplete="PF('novaCidade').show();"
+						actionListener="#{cidadeBean.novo}" update=":formCadastro:painel" />
 				</f:facet>
 
 				<p:column headerText="Nome" sortBy="#{cidade.nome}"
@@ -25,31 +29,62 @@
 				<p:column headerText="Estado" sortBy="#{cidade.estado.nome}"
 					filterStyle="width: 50%" filterBy="#{cidade.estado.nome}">
 					<h:outputText value="#{cidade.estado.nome}" />
+					<h:outputText value=" - " />
+					<h:outputText value="#{cidade.estado.sigla}" />
 				</p:column>
 
 				<p:column headerText="Opções">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{cidadeBean.excluir}"
+						update=":formListagem:tabela">
+						<p:confirm header="Confirmação"
+							message="Deseja excluir '#{cidade.nome}'?" icon="ui-icon-alert" />
+						<f:attribute name="cidadeSelecionada" value="#{cidade}" />
+					</p:commandButton>
+
+					<p:commandButton icon="ui-icon-pencil"
+						actionListener="#{cidadeBean.editar}"
+						update=":formCadastro:painel"
+						oncomplete="PF('novaCidade').show();">
+						<f:attribute name="cidadeSelecionada" value="#{cidade}" />
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
+
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+
 		</p:panel>
 	</h:form>
 
 	<p:dialog header="Cidades - Cadastro" widgetVar="novaCidade"
 		closeOnEscape="true" draggable="false" resizable="false" modal="true"
 		closable="false">
-		<h:form>
-			<h:panelGrid columns="2">
+		<h:form id="formCadastro">
+			<h:panelGrid id="painel" columns="2">
 				<p:outputLabel value="Nome:" />
-				<p:inputText maxlength="50" size="30" />
+				<p:inputText maxlength="50" size="30"
+					value="#{cidadeBean.cidade.nome}" />
 
 				<p:outputLabel value="Estado:" />
-				<p:selectOneMenu filter="true">
+				<p:selectOneMenu filter="true" value="#{cidadeBean.cidade.estado}"
+					converter="omnifaces.SelectItemsConverter">
 					<f:selectItem itemValue="" itemLabel="Selecione um estado" />
+					<f:selectItems value="#{cidadeBean.estados}" var="estados"
+						itemLabel="#{estados.nome}" itemValue="#{estados}" />
 				</p:selectOneMenu>
 			</h:panelGrid>
 
 			<center>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" />
+					<p:commandButton value="Salvar"
+						actionListener="#{cidadeBean.salvar}"
+						oncomplete="PF('novaCidade').hide();"
+						update=":formListagem:tabela" />
 					<p:commandButton value="Fechar"
 						oncomplete="PF('novaCidade').hide();" />
 				</h:panelGrid>

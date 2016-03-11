@@ -11,7 +11,9 @@ import javax.faces.event.ActionEvent;
 import org.omnifaces.util.Messages;
 
 import br.com.gabriel.drogaria.dao.CidadeDAO;
+import br.com.gabriel.drogaria.dao.EstadoDAO;
 import br.com.gabriel.drogaria.domain.Cidade;
+import br.com.gabriel.drogaria.domain.Estado;
 
 /*
  * Classe CidadeBean para se comunicar com a parte visual
@@ -27,9 +29,13 @@ public class CidadeBean implements Serializable {
 
 	private Cidade cidade;
 	private List<Cidade> cidades;
+	private List<Estado> estados;
 
 	public void novo() {
 		cidade = new Cidade();
+		
+		EstadoDAO estadoDAO = new EstadoDAO();
+		estados = estadoDAO.listar();
 	}
 
 	public void salvar() {
@@ -78,7 +84,15 @@ public class CidadeBean implements Serializable {
 	}
 
 	public void editar(ActionEvent evento) {
-		cidade = (Cidade) evento.getComponent().getAttributes().get("cidadeSelecionada");
+		try {
+			cidade = (Cidade) evento.getComponent().getAttributes().get("cidadeSelecionada");
+
+			EstadoDAO estadoDAO = new EstadoDAO();
+			estados = estadoDAO.listar();
+		} catch (RuntimeException erro) {
+			Messages.addFlashGlobalError("Ocorreu um erro ao tentar selecionar uma cidade");
+			erro.printStackTrace();
+		}	
 	}
 	
 	
@@ -98,6 +112,14 @@ public class CidadeBean implements Serializable {
 
 	public void setCidades(List<Cidade> cidades) {
 		this.cidades = cidades;
+	}
+	
+	public List<Estado> getEstados() {
+		return estados;
+	}
+	
+	public void setEstados(List<Estado> estados) {
+		this.estados = estados;
 	}
 
 }
